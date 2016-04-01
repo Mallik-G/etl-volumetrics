@@ -8,6 +8,8 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+--old table
+
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LoadObservations]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [LoadObservations](
