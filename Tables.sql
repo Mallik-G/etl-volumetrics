@@ -1,0 +1,37 @@
+USE [ODS]
+GO
+
+/****** Object:  Table [Tables]    Script Date: 3/19/2016 3:55:19 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Tables]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [Tables](
+	[TableID] [int] IDENTITY(1,1) NOT NULL,
+	[TableName] [nvarchar](255) NULL,
+	[DateCreated] [date] NULL,
+	[Active] [bit] NULL,
+ CONSTRAINT [PK_Tables] PRIMARY KEY CLUSTERED 
+(
+	[TableID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_Tables] UNIQUE NONCLUSTERED 
+(
+	[TableName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Tables_Active]') AND type = 'D')
+BEGIN
+ALTER TABLE [Tables] ADD  CONSTRAINT [DF_Tables_Active]  DEFAULT ((1)) FOR [Active]
+END
+
+GO
+
+
